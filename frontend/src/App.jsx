@@ -66,6 +66,7 @@ function AppLayout() {
         <main className="flex-1 bg-slate-50 p-4 sm:p-6">
           <Routes>
             <Route path="/" element={<Navigate to="/auth" replace />} />
+            <Route path="/auth" element={<LoginSignupPage />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/account/history" element={<TransactionsPage />} />
             <Route path="/card" element={<CardComponent />} />
