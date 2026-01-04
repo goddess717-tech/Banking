@@ -32,9 +32,9 @@ import {
 
 export default function ProfileSettingsPage() {
   const [userData] = useState({
-    fullName: 'Sarah Michelle Johnson',
+    fullName: 'Cindy S Kaza',
     customerId: 'NAB-2025-478291',
-    email: 's****h@email.com',
+    email: 'c****m@email.com',
     fullEmail: 'sarah.johnson@email.com',
     phone: '+1 (***) ***-4829',
     fullPhone: '+1 (555) 123-4829',
