@@ -124,7 +124,7 @@ export default function TransferPage() {
             <div className="flex justify-between items-center mt-1">
               <span>Main Account</span>
               <span className="font-mono">
-                ₦{fromAccount.balance.toLocaleString()}
+                ${fromAccount.balance.toLocaleString()}
               </span>
             </div>
           </section>
