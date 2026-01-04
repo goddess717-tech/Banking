@@ -52,13 +52,9 @@ export default function Dashboard() {
         {`
         main{
           min-height: calc(100vh - 60px);
-          padding-left: 250px;
-        }
-        
-        @media (max-width: 1024px) {
-          main {
-            padding-left: 0;
-          }
+          width: 100%;
+          max-width:1200px;
+          margin: 0 auto;
         }
           `}
     </style>
@@ -76,8 +72,8 @@ export default function Dashboard() {
       <div className="flex">
       
 
-        <main className="min-w-0">
-          <div className="px-4 md:px-6 mt-6">
+        <main>
+          <div className="md:px-6">
 
             {/* HERO (slides from top -> down) */}
             <motion.div variants={slide(0, -50)}>

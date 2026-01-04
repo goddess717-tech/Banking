@@ -30,14 +30,14 @@ const prettyDate = (iso) => {
 };
 
 const SAMPLE_TRANSACTIONS = [
-  { id: "tx_1001", title: "Star Market", ref: "SM-8347", note: "Weekly groceries", category: "Food & Drink", status: "Completed", amount: -42.95, date: "2025-11-16T12:22:00Z" },
-  { id: "tx_1005", title: "Coffee & Co", ref: "CFC-21", note: "Espresso", category: "Food & Drink", status: "Completed", amount: -4.5, date: "2025-11-16T01:50:00Z" },
-  { id: "tx_1003", title: "Uber", ref: "UB-9932", note: "Ride to office", category: "Transport", status: "Completed", amount: -12.74, date: "2025-11-15T16:05:00Z" },
-  { id: "tx_1002", title: "Acme Payroll", ref: "PAY-1123", note: "Salary Nov", category: "Income", status: "Completed", amount: 2500.0, date: "2025-11-15T03:12:00Z" },
-  { id: "tx_1006", title: "GlobalX Transfer", ref: "GX-7789", note: "Rent payment", category: "Transfer", status: "Completed", amount: -300.0, date: "2025-11-14T08:00:00Z" },
-  { id: "tx_1004", title: "Recur Energy", ref: "RN-556", note: "Electricity bill", category: "Utilities", status: "Pending", amount: -120.0, date: "2025-11-14T04:30:00Z" },
-  { id: "tx_1007", title: "Interest Payment", ref: "INT-90", note: "Savings interest", category: "Interest", status: "Completed", amount: 15.64, date: "2025-11-13T00:00:00Z" },
-  { id: "tx_1008", title: "Netflix", ref: "NF-3092", note: "Monthly subscription", category: "Entertainment", status: "Completed", amount: -13.99, date: "2025-11-12T20:05:00Z" }
+  { id: "tx_1001", title: "Star Market", ref: "SM-8347", note: "Weekly groceries", category: "Food & Drink", status: "Completed", amount: -4222.95, date: "2025-11-16T12:22:00Z" },
+  { id: "tx_1005", title: "Coffee & Co", ref: "CFC-21", note: "Espresso", category: "Food & Drink", status: "Completed", amount: -45.5, date: "2025-11-16T01:50:00Z" },
+  { id: "tx_1003", title: "Uber", ref: "UB-9932", note: "Ride to office", category: "Transport", status: "Completed", amount: -150.74, date: "2025-11-15T16:05:00Z" },
+  { id: "tx_1002", title: "Acme Payroll", ref: "PAY-1123", note: "Salary Nov", category: "Income", status: "Completed", amount: 250000.0, date: "2025-11-15T03:12:00Z" },
+  { id: "tx_1006", title: "GlobalX Transfer", ref: "GX-7789", note: "Rent payment", category: "Transfer", status: "Completed", amount: -3000.0, date: "2025-11-14T08:00:00Z" },
+  { id: "tx_1004", title: "Recur Energy", ref: "RN-556", note: "Electricity bill", category: "Utilities", status: "Pending", amount: -12000.0, date: "2025-11-14T04:30:00Z" },
+  { id: "tx_1007", title: "Interest Payment", ref: "INT-90", note: "Savings interest", category: "Interest", status: "Completed", amount: 15000.64, date: "2025-11-13T00:00:00Z" },
+  { id: "tx_1008", title: "Netflix", ref: "NF-3092", note: "Monthly subscription", category: "Entertainment", status: "Completed", amount: -99.99, date: "2025-11-12T20:05:00Z" }
 ];
 
 /* Small color mapping for categories */
@@ -88,10 +88,7 @@ export default function TransactionsPreview({ transactions = SAMPLE_TRANSACTIONS
           </div>
 
           <div className="flex items-center gap-3">
-            <button onClick={onShowAll} className="text-sm text-emerald-400 hover:underline flex items-center gap-2">
-              Show all <ChevronRight size={16} />
-            </button>
-            <button
+            {/* <button
               onClick={() => {
                 // quick export of preview
                 const rows = preview.map(t => ({ id: t.id, title: t.title, ref: t.ref, date: t.date, amount: t.amount, status: t.status, category: t.category }));
@@ -109,7 +106,7 @@ export default function TransactionsPreview({ transactions = SAMPLE_TRANSACTIONS
               title="Export preview"
             >
               <Download className="w-4 h-4" />
-            </button>
+            </button> */}
           </div>
         </div>
 
@@ -182,7 +179,9 @@ export default function TransactionsPreview({ transactions = SAMPLE_TRANSACTIONS
           })}
         </ul>
 
-        <div className="mt-4 text-sm text-slate-500">Showing latest {preview.length} transactions</div>
+        {/* <button onClick={onShowAll} className="text-sm text-emerald-400 hover:underline flex items-center justify-center gap-2 mt-6 w-full">
+              Show all <ChevronRight size={16} />
+            </button> */}
       </section>
     </>
   );

@@ -1215,35 +1215,30 @@ export default function ProfileSettingsPage() {
           onClick={() => setUiState(prev => ({ ...prev, activeTab: 'identity' }))}
         >
           <User size={18} />
-          Identity
         </button>
         <button
           className={`tab-button ${uiState.activeTab === 'contact' ? 'active' : ''}`}
           onClick={() => setUiState(prev => ({ ...prev, activeTab: 'contact' }))}
         >
           <Mail size={18} />
-          Contact
         </button>
         <button
           className={`tab-button ${uiState.activeTab === 'security' ? 'active' : ''}`}
           onClick={() => setUiState(prev => ({ ...prev, activeTab: 'security' }))}
         >
           <Shield size={18} />
-          Security
         </button>
         <button
           className={`tab-button ${uiState.activeTab === 'preferences' ? 'active' : ''}`}
           onClick={() => setUiState(prev => ({ ...prev, activeTab: 'preferences' }))}
         >
           <Settings size={18} />
-          Preferences
         </button>
         <button
           className={`tab-button ${uiState.activeTab === 'privacy' ? 'active' : ''}`}
           onClick={() => setUiState(prev => ({ ...prev, activeTab: 'privacy' }))}
         >
           <Lock size={18} />
-          Privacy
         </button>
       </div>
 

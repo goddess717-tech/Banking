@@ -165,7 +165,7 @@ export default function Topbar({ onMenuClick }) {
           width: 32px;
           height: 32px;
           border-radius: 50%;
-          background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
+          background: linear-gradient(135deg, #050D1F 0%, #1D4ED8 100%);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -279,9 +279,8 @@ export default function Topbar({ onMenuClick }) {
       <header className="topbar">
         <div className="topbar-container">
           <div className="topbar-left">
-            <a href='/dashboard' className="topbar-logo">
-              <div className="logo-icon">NA</div>
-              <span className="logo-text">New Apex</span>
+            <a href='/dashboard'>
+              <img  src="/logo.png" alt="" style={{height:'50px'}} />
             </a>
 
             <div className="topbar-search">
@@ -341,12 +340,12 @@ export default function Topbar({ onMenuClick }) {
             Security & Privacy
           </a>
           <div className="dropdown-divider"></div>
-          <button className="dropdown-item" style={{color:'#b82d2dff'}}>
+          <a href='/auth' className="dropdown-item" style={{ color: '#b82d2dff' }}>
             <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
             </svg>
             Sign Out
-          </button>
+          </a>
         </div>
       </header>
     </>

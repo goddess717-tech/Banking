@@ -12,7 +12,7 @@ export default function TransferPage() {
 
   const [fromAccount] = useState({
     id: "acc_001",
-    balance: 250000
+    balance: 7356300.86
   });
 
   const [recipient, setRecipient] = useState({
@@ -135,7 +135,7 @@ export default function TransferPage() {
             <input
               type="text"
               maxLength={10}
-              className="w-full border rounded px-3 py-2 mt-1"
+              className="w-full border rounded px-3 py-2 mt-1 bg-transparent"
               value={recipient.accountNumber}
               onChange={(e) => {
                 const value = e.target.value.replace(/\D/g, "");
@@ -159,7 +159,7 @@ export default function TransferPage() {
             <label className="text-sm">Amount</label>
             <input
               type="number"
-              className="w-full border rounded px-3 py-2 mt-1 text-lg"
+              className="w-full border rounded px-3 py-2 mt-1 text-lg bg-transparent"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
             />
@@ -174,7 +174,7 @@ export default function TransferPage() {
           <section className="mb-6">
             <label className="text-sm">Narration (optional)</label>
             <input
-              className="w-full border rounded px-3 py-2 mt-1"
+              className="w-full border rounded px-3 py-2 mt-1 bg-transparent"
               value={narration}
               onChange={(e) => setNarration(e.target.value)}
             />

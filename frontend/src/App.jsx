@@ -1,6 +1,11 @@
 // App.jsx
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import { useState } from "react";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
+import { useState, useEffect } from "react";
 
 import Dashboard from "./pages/Dashboard";
 import TransactionsPage from "./pageu/Trasactions";
@@ -15,109 +20,71 @@ import usePageLoader from "./hooks/usePageLoader";
 import CheckDepositPage from "./pageu/ChequeDeposit";
 import ProfileSettingsPage from "./pageu/ProfileSettings";
 import SecurityPrivacyPage from "./pageu/SecurityPrivacy";
+import LoginSignupPage from "./pageu/Auth";
 
-function PageWrapper({ children }) {
-  const loading = usePageLoader();
-  const location = useLocation();
+/* ---------------- Scroll Controller ---------------- */
+function ScrollToTop() {
+  const { pathname } = useLocation();
 
-  if (loading) return <LoadingScreen />;
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
-  return (
-    <div key={location.pathname} className="animate-slideFadeUp">
-      {children}
-    </div>
-  );
+  return null;
 }
 
-export default function App() {
+/* ---------------- Layout ---------------- */
+function AppLayout() {
+  const location = useLocation();
+  const loading = usePageLoader();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
+  const isAuthRoute = location.pathname.startsWith("/auth");
+
+  // Block EVERYTHING until loading completes
+  if (loading) {
+    return <LoadingScreen />;
+  }
+
   return (
-    <BrowserRouter>
-      {/* TOPBAR */}
-      <Header onMenuClick={() => setSidebarOpen(true)} />
+    <>
+      <ScrollToTop />
 
-      <div className="flex min-h-screen pt-[64px]">
-        {/* SIDEBAR */}
-        <Sidebar
-          isOpen={sidebarOpen}
-          onClose={() => setSidebarOpen(false)}
-        />
+      {!isAuthRoute && (
+        <Header onMenuClick={() => setSidebarOpen(true)} />
+      )}
 
-        {/* MAIN CONTENT */}
+      <div className={`flex min-h-screen ${!isAuthRoute ? "pt-[64px]" : ""}`}>
+        {!isAuthRoute && (
+          <Sidebar
+            isOpen={sidebarOpen}
+            onClose={() => setSidebarOpen(false)}
+          />
+        )}
+
         <main className="flex-1 bg-slate-50 p-4 sm:p-6">
           <Routes>
-            <Route
-              path="/dashboard"
-              element={
-                <PageWrapper>
-                  <Dashboard />
-                </PageWrapper>
-              }
-            />
-
-            <Route
-              path="/account/history"
-              element={
-                <PageWrapper>
-                  <TransactionsPage />
-                </PageWrapper>
-              }
-            />
-
-            <Route
-              path="/card"
-              element={
-                <PageWrapper>
-                  <CardComponent />
-                </PageWrapper>
-              }
-            />
-
-            <Route
-              path="/account/statements"
-              element={
-                <PageWrapper>
-                  <AccountStatementPage />
-                </PageWrapper>
-              }
-            />
-
-            <Route
-              path="/transfer/local"
-              element={
-                <PageWrapper>
-                  <LocalTransferPage />
-                </PageWrapper>
-              }
-            />
-             <Route
-              path="/deposit/cheque"
-              element={
-                <PageWrapper>
-                  <CheckDepositPage />
-                </PageWrapper>
-              }
-            />
-            <Route
-              path="/profile/settings"
-              element={
-                <PageWrapper>
-                  <ProfileSettingsPage />
-                </PageWrapper>
-              }
-            />
-            <Route
-              path="/security/privacy"
-              element={
-                <PageWrapper>
-                  <SecurityPrivacyPage />
-                </PageWrapper>
-              }
-            />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/account/history" element={<TransactionsPage />} />
+            <Route path="/card" element={<CardComponent />} />
+            <Route path="/account/statements" element={<AccountStatementPage />} />
+            <Route path="/transfer/local" element={<LocalTransferPage />} />
+            <Route path="/deposit/cheque" element={<CheckDepositPage />} />
+            <Route path="/profile/settings" element={<ProfileSettingsPage />} />
+            <Route path="/security/privacy" element={<SecurityPrivacyPage />} />
+            <Route path="/auth" element={<LoginSignupPage />} />
           </Routes>
         </main>
       </div>
+    </>
+  );
+}
+
+/* ---------------- App Root ---------------- */
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AppLayout />
     </BrowserRouter>
   );
 }

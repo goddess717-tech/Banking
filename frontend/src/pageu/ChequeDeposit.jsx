@@ -139,7 +139,7 @@ export default function CheckDepositPage() {
   };
 
   return (
-    <div style={{ marginLeft: '280px', marginTop: '64px', minHeight: 'calc(100vh - 64px)', background: '#F8F9FA', padding: '32px 40px' }}>
+    <div style={{ minHeight: 'calc(100vh - 64px)', background: '#F8F9FA', padding: '12px 10px' }}>
       <style>{`
         @media (max-width: 1024px) {
           .check-deposit-container { margin-left: 0 !important; padding: 24px 20px !important; }
@@ -183,7 +183,7 @@ export default function CheckDepositPage() {
               Capture Check Images
             </h2>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '24px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', marginBottom: '24px' }}>
               <div>
                 <label style={{ fontSize: '14px', fontWeight: 600, color: '#374151', marginBottom: '12px', display: 'block' }}>
                   Front of Check *

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { 
   Send, 
   Download, 
@@ -15,21 +16,39 @@ import {
 } from "lucide-react";
 
 const ACTIONS = [
-  { id: 1, label: "Send Money", icon: Send },
-  { id: 2, label: "Deposit", icon: Download },
-  { id: 3, label: "Pay Bill", icon: CreditCard },
-  { id: 4, label: "Transfer", icon: Repeat },
-  { id: 5, label: "Statements", icon: FileText },
-  { id: 6, label: "Settings", icon: Settings },
-  { id: 7, label: "Recipients", icon: Users },
-  { id: 8, label: "Mobile Top Up", icon: Smartphone },
-  { id: 9, label: "Request Money", icon: DollarSign },
-  { id: 10, label: "Investments", icon: TrendingUp },
-  { id: 11, label: "Insurance", icon: Shield },
-  { id: 12, label: "Rewards", icon: Gift }
+  {
+    id: 1,
+    label: "Send Money",
+    icon: Send,
+    path: "/transfer/local",
+    color: "#2563EB", // blue-600
+  },
+  {
+    id: 2,
+    label: "Deposit",
+    icon: Download,
+    path: "/deposit/cheque",
+    color: "#16A34A", // green-600
+  },
+  {
+    id: 5,
+    label: "Statements",
+    icon: FileText,
+    path: "/account/statements",
+    color: "#475569", // slate-600
+  },
+  {
+    id: 6,
+    label: "Settings",
+    icon: Settings,
+    path: "/profile/settings",
+    color: "#D97706", // amber-600
+  },
 ];
 
+
 export default function QuickActions() {
+  const navigate = useNavigate();
   const [qaExpanded, setQaExpanded] = useState(false);
 
   const visible = qaExpanded ? ACTIONS : ACTIONS.slice(0, 4);
@@ -49,13 +68,13 @@ export default function QuickActions() {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          margin-bottom: 20px;
+          margin-bottom: 10px;
         }
 
         .qa-title {
-          font-size: 18px;
+          font-size: 15px;
           font-weight: 700;
-          color: #0F172A;
+          color: #363638ff;
         }
 
         .qa-toggle-btn {
@@ -122,9 +141,12 @@ export default function QuickActions() {
         }
 
         .qa-button:hover .qa-icon-wrapper {
-          background: #0F172A;
-          border-color: #0F172A;
-        }
+  background: var(--qa-color);
+  border-color: var(--qa-color);
+}
+
+
+
 
         .qa-icon {
           width: 20px;
@@ -133,9 +155,9 @@ export default function QuickActions() {
           transition: color 0.2s;
         }
 
-        .qa-button:hover .qa-icon {
-          color: #ffffff;
-        }
+       .qa-button:hover .qa-icon {
+  color: #ffffff;
+}
 
         .qa-label {
           font-size: 13px;
@@ -231,18 +253,27 @@ export default function QuickActions() {
         </div>
 
         <div className="qa-grid">
-          {visible.map(({ id, label, icon: Icon }) => (
-            <button
-              key={id}
-              className="qa-button"
-              aria-label={label}
-            >
-              <div className="qa-icon-wrapper">
-                <Icon className="qa-icon" strokeWidth={2} />
-              </div>
-              <span className="qa-label">{label}</span>
-            </button>
-          ))}
+       {visible.map(({ id, label, icon: Icon, path, color }) => (
+  <button
+    key={id}
+    className="qa-button"
+    aria-label={label}
+    onClick={() => navigate(path)}
+  >
+    <div
+      className="qa-icon-wrapper"
+      style={{ borderColor: color }}
+    >
+      <Icon
+        className="qa-icon"
+        strokeWidth={2}
+        style={{ "--qa-color": color }}
+      />
+    </div>
+    <span className="qa-label">{label}</span>
+  </button>
+))}
+
         </div>
       </section>
     </>

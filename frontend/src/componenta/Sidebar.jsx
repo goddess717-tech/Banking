@@ -38,7 +38,7 @@ export default function Sidebar({ isOpen, onClose }) {
     items: [
       {
         id: "account-history",
-        label: "Account History",
+        label: "History",
         icon: History,
         path: "/account/history"
       },
@@ -51,26 +51,20 @@ export default function Sidebar({ isOpen, onClose }) {
     ]
   },
   {
-    section: "Fund Transfer",
+    section: "Payments",
     items: [
       {
         id: "local-transfer",
-        label: "Local Transfer",
+        label: "Transfer",
         icon: ArrowLeftRight,
         path: "/transfer/local"
       },
-      {
-        id: "international-transfer",
-        label: "International Transfer",
-        icon: Globe,
-        path: "/transfer/international"
-      },
-      {
-        id: "inter-account-transfer",
-        label: "Inter-Account Transfer",
-        icon: RefreshCcw,
-        path: "/transfer/inter-account"
-      }
+      // {
+      //   id: "international-transfer",
+      //   label: "Pay Bills",
+      //   icon: DollarSign,
+      //   path: "/pay-bills"
+      // }
     ]
   },
   {
@@ -81,12 +75,6 @@ export default function Sidebar({ isOpen, onClose }) {
         label: "Cheque Deposit",
         icon: Building2,
         path: "/deposit/cheque"
-      },
-      {
-        id: "deposit-history",
-        label: "Deposit History",
-        icon: ReceiptText,
-        path: "/deposits/history"
       }
     ]
   }
@@ -329,7 +317,6 @@ const navigate = useNavigate();
           border-radius: 12px;
           cursor: pointer;
           transition: all 0.2s;
-          margin-bottom: 10px;
         }
 
         .action-btn:hover {
@@ -519,16 +506,6 @@ const navigate = useNavigate();
           
 
           <div className="quick-actions">
-            <button className="action-btn">
-              <Plus size={18} strokeWidth={2.5} />
-              New Transfer
-            </button>
-            
-            <button className="action-btn action-btn-secondary">
-              <DollarSign size={18} strokeWidth={2.5} />
-              Pay Bill
-            </button>
-
             <div className="support-card">
               <div className="support-header">
                 <Headphones className="support-icon" strokeWidth={2} />

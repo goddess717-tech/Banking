@@ -39,7 +39,7 @@ export default function Hero() {
   });
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-[#0C1F3F] via-[#0E3A53] to-[#0F5F7F] text-white py-8 shadow-xl">
+    <section className="relative overflow-hidden bg-gradient-to-br from-[#050D1F] via-[#071633] to-[#0A2242] text-white py-8 shadow-xl">
 
       {/* Soft depth glow */}
       <div className="absolute inset-0 bg-white/5 backdrop-blur-sm pointer-events-none" />

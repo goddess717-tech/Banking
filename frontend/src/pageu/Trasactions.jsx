@@ -13,23 +13,119 @@ import {
 const PAGE_SIZE = 10;
 const TOTAL_TRANSACTIONS = 237;
 
+const resolveStatus = (status, isoDate) => {
+  if (status !== "Pending") return status;
+
+  const hoursElapsed =
+    (Date.now() - new Date(isoDate).getTime()) / 36e5;
+
+  if (hoursElapsed <= 24) return "Pending";
+
+  // after 24h → forced resolution
+  return Math.random() > 0.4 ? "Reversed" : "Failed";
+};
+
+
+const STATUS_STYLES = {
+  Completed: {
+    bg: "bg-emerald-500/10",
+    text: "text-emerald-600",
+    border: "border-emerald-600/20",
+  },
+  Pending: {
+    bg: "bg-amber-500/10",
+    text: "text-amber-600",
+    border: "border-amber-600/20",
+  },
+  Reversed: {
+    bg: "bg-slate-500/10",
+    text: "text-slate-600",
+    border: "border-slate-600/20",
+  },
+  Failed: {
+    bg: "bg-red-500/10",
+    text: "text-red-600",
+    border: "border-red-600/20",
+  },
+};
+
+const TRANSACTION_TYPES = [
+  {
+    title: "Trust Distribution",
+    min: 120_000,
+    max: 850_000,
+    note: "Quarterly trust payout",
+  },
+  {
+    title: "Estate Transfer Settlement",
+    min: -450_000,
+    max: -2_300_000,
+    note: "Estate distribution",
+  },
+  {
+    title: "Interbank Liquidity Sweep",
+    min: -1_800_000,
+    max: -4_200_000,
+    note: "Overnight liquidity movement",
+  },
+  {
+    title: "Custodial Asset Reallocation",
+    min: -600_000,
+    max: -1_500_000,
+    note: "Portfolio rebalancing",
+  },
+  {
+    title: "FX Net Settlement",
+    min: -250_000,
+    max: 450_000,
+    note: "Foreign exchange netting",
+  },
+  {
+    title: "Private Tax Settlement",
+    min: -180_000,
+    max: -950_000,
+    note: "Federal & state tax payment",
+  },
+  {
+    title: "Family Office Operating Expense",
+    min: -35_000,
+    max: -180_000,
+    note: "Administrative disbursement",
+  },
+  {
+    title: "Escrow Release",
+    min: 300_000,
+    max: 2_700_000,
+    note: "Legal escrow release",
+  },
+];
+
+
+
+
+
+
 /* -----------------------------
    MOCK DATA
 ----------------------------- */
 const ALL_TRANSACTIONS = Array.from({ length: TOTAL_TRANSACTIONS }, (_, i) => {
-  const id = i + 1;
-  const credit = id % 4 === 0;
+  const type =
+    TRANSACTION_TYPES[i % TRANSACTION_TYPES.length];
+
+  const rawAmount =
+    Math.random() * (type.max - type.min) + type.min;
 
   return {
-    id: `tx_${id}`,
-    title: credit ? "Acme Payroll" : "Star Market",
-    ref: `REF-${1000 + id}`,
-    amount: credit ? 2500 : -(Math.random() * 180 + 10),
-    status: id % 6 === 0 ? "Pending" : "Completed",
-    date: new Date(Date.now() - id * 86400000).toISOString(),
-    note: credit ? "Salary payment" : "Card purchase",
+    id: `tx_${100000 + i}`,
+    title: type.title,
+    ref: `PB-${Math.floor(100000000 + Math.random() * 900000000)}`,
+    amount: Number(rawAmount.toFixed(2)),
+    status: i % 9 === 0 ? "Pending" : "Completed",
+    date: new Date(Date.now() - i * 36 * 60 * 60 * 1000).toISOString(),
+    note: type.note,
   };
 });
+
 
 /* -----------------------------
    UTILITIES
@@ -130,6 +226,12 @@ export default function Transactions() {
         <div className="space-y-2">
           {pageData.map((tx) => {
             const debit = tx.amount < 0;
+      const finalStatus = resolveStatus(tx.status, tx.date);
+const statusStyle = STATUS_STYLES[finalStatus];
+
+
+
+
 
             return (
               <div
@@ -166,9 +268,15 @@ export default function Transactions() {
                   >
                     {money(tx.amount)}
                   </span>
-                  <span className="text-xs px-2 py-1 rounded-full bg-gray-100">
-                    {tx.status}
-                  </span>
+                  <span
+  className={`text-xs px-2 py-1 rounded-full border font-medium
+    ${statusStyle.bg}
+    ${statusStyle.text}
+    ${statusStyle.border}
+  `}
+>
+  {finalStatus}
+</span>
                 </div>
               </div>
             );
