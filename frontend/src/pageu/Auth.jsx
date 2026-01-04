@@ -7,6 +7,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const MOCK_USER = {
     email: "cindykazamedium@gmail.com",
@@ -14,33 +15,45 @@ export default function Login() {
   };
 
   const handleLogin = () => {
-    setError("");
+    if (loading) return;
 
-    if (email === MOCK_USER.email && password === MOCK_USER.password) {
-      navigate("/dashboard");
-    } else {
-      setError("Incorrect email or password");
-    }
+    setError("");
+    setLoading(true);
+
+    // Simulate real authentication delay
+    setTimeout(() => {
+      if (email === MOCK_USER.email && password === MOCK_USER.password) {
+        navigate("/dashboard");
+      } else {
+        setError("Incorrect email or password");
+        setLoading(false);
+      }
+    }, 3000); // ⏱️ 3 seconds
   };
 
   return (
     <>
-      {/* Logo */}
-
+      <style>
+        {`
+          @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+          }
+        `}
+      </style>
 
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#0b1f33] via-[#0f2d4a] to-[#081726]">
-
         <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl p-8">
 
           {/* Brand */}
           <div className="mb-8 text-center">
-           <div className="flex justify-center mb-4">
-  <img
-    src="/logo.png"
-    alt="New Apex Bank"
-    className="h-10 w-auto object-contain"
-  />
-</div>
+            <div className="flex justify-center mb-4">
+              <img
+                src="/logo.png"
+                alt="New Apex Bank"
+                className="h-10 w-auto object-contain"
+              />
+            </div>
             <p className="text-sm text-gray-500 mt-1">
               Secure Banking Access
             </p>
@@ -62,8 +75,9 @@ export default function Login() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              disabled={loading}
               placeholder="you@company.com"
-              className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#0f2d4a] bg-transparent"
+              className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#0f2d4a] disabled:opacity-60  bg-transparent"
             />
           </div>
 
@@ -76,17 +90,40 @@ export default function Login() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              disabled={loading}
               placeholder="••••••••"
-              className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#0f2d4a] bg-transparent"
+              className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#0f2d4a] disabled:opacity-60 bg-transparent"
             />
           </div>
 
           {/* Login Button */}
           <button
             onClick={handleLogin}
-            className="w-full rounded-lg bg-[#0f2d4a] text-white py-3 text-sm font-semibold tracking-wide hover:bg-[#123a5c] transition"
+            disabled={loading}
+            className={`w-full rounded-lg py-3 text-sm font-semibold tracking-wide transition
+              ${loading
+                ? "bg-[#0f2d4a]/80 cursor-not-allowed"
+                : "bg-[#0f2d4a] hover:bg-[#123a5c]"
+              }
+              text-white flex items-center justify-center gap-3`}
           >
-            Sign in
+            {loading ? (
+              <>
+                <span
+                  style={{
+                    width: 18,
+                    height: 18,
+                    border: "3px solid rgba(255,255,255,0.3)",
+                    borderTopColor: "white",
+                    borderRadius: "50%",
+                    animation: "spin 1s linear infinite",
+                  }}
+                />
+                Signing in…
+              </>
+            ) : (
+              "Sign in"
+            )}
           </button>
 
           {/* Footer */}
@@ -96,6 +133,5 @@ export default function Login() {
         </div>
       </div>
     </>
-
   );
 }
