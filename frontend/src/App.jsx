@@ -64,6 +64,7 @@ function AppLayout() {
 
         <main className="flex-1 bg-slate-50 p-4 sm:p-6">
           <Routes>
+            <Route path="/" element={<Navigate to="/auth" replace />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/account/history" element={<TransactionsPage />} />
             <Route path="/card" element={<CardComponent />} />
@@ -72,7 +73,6 @@ function AppLayout() {
             <Route path="/deposit/cheque" element={<CheckDepositPage />} />
             <Route path="/profile/settings" element={<ProfileSettingsPage />} />
             <Route path="/security/privacy" element={<SecurityPrivacyPage />} />
-            <Route path="/auth" element={<LoginSignupPage />} />
           </Routes>
         </main>
       </div>
