@@ -1,6 +1,7 @@
 // components/TransactionsPreview.jsx
 import React, { useMemo, useState } from "react";
 import { Info, Download, Eye, ChevronRight, ArrowDownLeft, ArrowUpRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 
 /**
@@ -30,15 +31,78 @@ const prettyDate = (iso) => {
 };
 
 const SAMPLE_TRANSACTIONS = [
-  { id: "tx_1001", title: "Star Market", ref: "SM-8347", note: "Weekly groceries", category: "Food & Drink", status: "Completed", amount: -4222.95, date: "2025-11-16T12:22:00Z" },
-  { id: "tx_1005", title: "Coffee & Co", ref: "CFC-21", note: "Espresso", category: "Food & Drink", status: "Completed", amount: -45.5, date: "2025-11-16T01:50:00Z" },
-  { id: "tx_1003", title: "Uber", ref: "UB-9932", note: "Ride to office", category: "Transport", status: "Completed", amount: -150.74, date: "2025-11-15T16:05:00Z" },
-  { id: "tx_1002", title: "Acme Payroll", ref: "PAY-1123", note: "Salary Nov", category: "Income", status: "Completed", amount: 250000.0, date: "2025-11-15T03:12:00Z" },
-  { id: "tx_1006", title: "GlobalX Transfer", ref: "GX-7789", note: "Rent payment", category: "Transfer", status: "Completed", amount: -3000.0, date: "2025-11-14T08:00:00Z" },
-  { id: "tx_1004", title: "Recur Energy", ref: "RN-556", note: "Electricity bill", category: "Utilities", status: "Pending", amount: -12000.0, date: "2025-11-14T04:30:00Z" },
-  { id: "tx_1007", title: "Interest Payment", ref: "INT-90", note: "Savings interest", category: "Interest", status: "Completed", amount: 15000.64, date: "2025-11-13T00:00:00Z" },
-  { id: "tx_1008", title: "Netflix", ref: "NF-3092", note: "Monthly subscription", category: "Entertainment", status: "Completed", amount: -99.99, date: "2025-11-12T20:05:00Z" }
+  {
+    id: "tx_2001",
+    title: "Acme Payroll",
+    ref: "PAY-1123",
+    note: "Monthly salary deposit",
+    category: "Income",
+    status: "Completed",
+    amount: 250000.0,
+    date: "2025-11-15T03:12:00Z",
+  },
+  {
+    id: "tx_2002",
+    title: "Interest Credit",
+    ref: "INT-901",
+    note: "Savings account interest",
+    category: "Interest",
+    status: "Completed",
+    amount: 15000.64,
+    date: "2025-11-13T00:00:00Z",
+  },
+  {
+    id: "tx_2003",
+    title: "Acme Payroll",
+    ref: "PAY-1098",
+    note: "Bonus adjustment",
+    category: "Income",
+    status: "Completed",
+    amount: 42000.0,
+    date: "2025-11-10T02:45:00Z",
+  },
+  {
+    id: "tx_2004",
+    title: "GlobalX Transfer",
+    ref: "GX-7789",
+    note: "Residential lease payment",
+    category: "Transfer",
+    status: "Completed",
+    amount: -3000.0,
+    date: "2025-11-08T08:00:00Z",
+  },
+  {
+    id: "tx_2005",
+    title: "Recur Energy",
+    ref: "RN-556",
+    note: "Electricity & grid services",
+    category: "Utilities",
+    status: "Completed",
+    amount: -12000.0,
+    date: "2025-11-06T04:30:00Z",
+  },
+  {
+    id: "tx_2006",
+    title: "Treasury Credit",
+    ref: "TR-4482",
+    note: "Federal interest adjustment",
+    category: "Interest",
+    status: "Completed",
+    amount: 8700.0,
+    date: "2025-11-04T01:00:00Z",
+  },
+  {
+    id: "tx_2007",
+    title: "Acme Payroll",
+    ref: "PAY-1044",
+    note: "Salary deposit",
+    category: "Income",
+    status: "Completed",
+    amount: 250000.0,
+    date: "2025-11-01T03:10:00Z",
+  },
 ];
+
 
 /* Small color mapping for categories */
 const CATEGORY_COLORS = {
@@ -86,7 +150,9 @@ export default function TransactionsPreview({ transactions = SAMPLE_TRANSACTIONS
           <div>
             <h3 className="section-title text-slate-700 dark:text-slate-300">Recent Activity</h3>
           </div>
-
+           <Link to={'/account/history'} className="text-sm text-emerald-400 hover:underline flex items-center gap-2">
+              Show all <ChevronRight size={16} />
+            </Link>
           <div className="flex items-center gap-3">
             {/* <button
               onClick={() => {
@@ -179,9 +245,7 @@ export default function TransactionsPreview({ transactions = SAMPLE_TRANSACTIONS
           })}
         </ul>
 
-        {/* <button onClick={onShowAll} className="text-sm text-emerald-400 hover:underline flex items-center justify-center gap-2 mt-6 w-full">
-              Show all <ChevronRight size={16} />
-            </button> */}
+        
       </section>
     </>
   );

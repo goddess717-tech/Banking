@@ -55,7 +55,7 @@ function AppLayout() {
         <Header onMenuClick={() => setSidebarOpen(true)} />
       )}
 
-      <div className={`flex min-h-screen ${!isAuthRoute ? "pt-[64px]" : ""}`}>
+      <div className={`flex h-screen ${!isAuthRoute ? "pt-[64px]" : ""}`}>
         {!isAuthRoute && (
           <Sidebar
             isOpen={sidebarOpen}
@@ -63,7 +63,7 @@ function AppLayout() {
           />
         )}
 
-        <main className="flex-1 bg-slate-50 p-4 sm:p-6">
+        <main className="flex-1 min-h-0 overflow-y-auto bg-slate-50 p-4 sm:p-6">
           <Routes>
             <Route path="/" element={<Navigate to="/auth" replace />} />
             <Route path="/auth" element={<LoginSignupPage />} />

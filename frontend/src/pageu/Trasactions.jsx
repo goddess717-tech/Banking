@@ -6,24 +6,15 @@ import {
   ChevronRight,
   X,
 } from "lucide-react";
+import { ALL_TRANSACTIONS, TOTAL_TRANSACTIONS, resolveStatus } from "../data/transaction.data";
 
 /* -----------------------------
    CONFIG
 ----------------------------- */
 const PAGE_SIZE = 10;
-const TOTAL_TRANSACTIONS = 237;
 
-const resolveStatus = (status, isoDate) => {
-  if (status !== "Pending") return status;
 
-  const hoursElapsed =
-    (Date.now() - new Date(isoDate).getTime()) / 36e5;
 
-  if (hoursElapsed <= 24) return "Pending";
-
-  // after 24h → forced resolution
-  return Math.random() > 0.4 ? "Reversed" : "Failed";
-};
 
 
 const STATUS_STYLES = {
@@ -49,56 +40,9 @@ const STATUS_STYLES = {
   },
 };
 
-const TRANSACTION_TYPES = [
-  {
-    title: "Trust Distribution",
-    min: 120_000,
-    max: 850_000,
-    note: "Quarterly trust payout",
-  },
-  {
-    title: "Estate Transfer Settlement",
-    min: -450_000,
-    max: -2_300_000,
-    note: "Estate distribution",
-  },
-  {
-    title: "Interbank Liquidity Sweep",
-    min: -1_800_000,
-    max: -4_200_000,
-    note: "Overnight liquidity movement",
-  },
-  {
-    title: "Custodial Asset Reallocation",
-    min: -600_000,
-    max: -1_500_000,
-    note: "Portfolio rebalancing",
-  },
-  {
-    title: "FX Net Settlement",
-    min: -250_000,
-    max: 450_000,
-    note: "Foreign exchange netting",
-  },
-  {
-    title: "Private Tax Settlement",
-    min: -180_000,
-    max: -950_000,
-    note: "Federal & state tax payment",
-  },
-  {
-    title: "Family Office Operating Expense",
-    min: -35_000,
-    max: -180_000,
-    note: "Administrative disbursement",
-  },
-  {
-    title: "Escrow Release",
-    min: 300_000,
-    max: 2_700_000,
-    note: "Legal escrow release",
-  },
-];
+
+
+
 
 
 
@@ -108,23 +52,11 @@ const TRANSACTION_TYPES = [
 /* -----------------------------
    MOCK DATA
 ----------------------------- */
-const ALL_TRANSACTIONS = Array.from({ length: TOTAL_TRANSACTIONS }, (_, i) => {
-  const type =
-    TRANSACTION_TYPES[i % TRANSACTION_TYPES.length];
 
-  const rawAmount =
-    Math.random() * (type.max - type.min) + type.min;
 
-  return {
-    id: `tx_${100000 + i}`,
-    title: type.title,
-    ref: `PB-${Math.floor(100000000 + Math.random() * 900000000)}`,
-    amount: Number(rawAmount.toFixed(2)),
-    status: i % 9 === 0 ? "Pending" : "Completed",
-    date: new Date(Date.now() - i * 36 * 60 * 60 * 1000).toISOString(),
-    note: type.note,
-  };
-});
+
+
+
 
 
 /* -----------------------------
@@ -298,7 +230,7 @@ const statusStyle = STATUS_STYLES[finalStatus];
               key={p}
               onClick={() => setPage(p)}
               className={`px-3 py-1 rounded border ${
-                p === page ? "bg-black text-white" : ""
+                p === page ? "bg-gradient-to-br from-[#050D1F] via-[#071633] to-[#0A2242] text-white" : ""
               }`}
             >
               {p}
