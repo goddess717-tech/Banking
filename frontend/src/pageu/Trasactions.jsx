@@ -86,8 +86,8 @@ function TransactionDrawer({ tx, onClose }) {
 
   return (
     <>
-      <div className="fixed inset-0 bg-black/40 z-40" onClick={onClose} />
-      <aside className="fixed right-0 top-0 h-full w-full sm:w-[420px] bg-white z-50 p-6 overflow-y-auto">
+      <div className="fixed inset-0 bg-black/40 z-40 " onClick={onClose} />
+      <aside className="fixed right-0 top-0 h-full w-full sm:w-[420px] bg-white z-50 p-6 overflow-y-auto pt-24">
         <div className="flex justify-between items-center mb-6">
           <h2 className="font-semibold text-lg">Transaction Details</h2>
           <button onClick={onClose}>
